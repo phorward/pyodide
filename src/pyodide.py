@@ -92,6 +92,8 @@ def find_imports(code, prefix=""):
                 for name in reversed(node.names):
                     imports.add(name.name)
 
+    print(prefix, imports)
+
     return list(imports)
 
 
