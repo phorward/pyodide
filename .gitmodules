@@ -1,6 +1,0 @@
-[submodule "packages/html5/html5"]
-	path = packages/html5/html5
-	url = git@github.com:viur-framework/html5.git
-[submodule "packages/logics/logics"]
-	path = packages/logics/logics
-	url = git@github.com:viur-framework/logics.git
