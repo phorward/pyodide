@@ -66,6 +66,7 @@ def find_imports(code, prefix=""):
             for name in node.names:
                 name = name.name.split('.')[0]
 
+                # This starting with the current prefix can be ignored.
                 if prefix and (prefix.startswith(name + '.')
                                or prefix == name):
                     continue
@@ -76,6 +77,8 @@ def find_imports(code, prefix=""):
             name = node.module
 
             if prefix and name:
+                # When prefix is provided, check either for full prefix
+                # or for the prefix' first element.
                 if name.startswith(prefix):
                     name = name[len(prefix) + 1:].split('.')[0]
                 else:
@@ -83,16 +86,12 @@ def find_imports(code, prefix=""):
                     if prefix.startswith(name + '.') or prefix == name:
                         continue
 
-                imports.add(name)
-
-            elif name:
+            if name:
                 imports.add(name.split('.')[0])
 
             else:
                 for name in reversed(node.names):
                     imports.add(name.name)
-
-    print(prefix, imports)
 
     return list(imports)
 
