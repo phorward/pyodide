@@ -105,14 +105,13 @@ $(BZIP2BUILD)/libbz2.a: $(BZIP2TARBALL)
 	)
 
 
-$(BUILD)/Makefile: $(BUILD)/.patched $(ZLIBBUILD)/.configured $(SQLITEBUILD)/libsqlite3.la $(BZIP2BUILD)/libbz2.a
+$(BUILD)/Makefile: $(BUILD)/.patched
 	cp config.site $(BUILD)/
 	( \
 		cd $(BUILD); \
 		EMCC_CFLAGS="-s WASM=0" CONFIG_SITE=./config.site READELF=true emconfigure \
 		  ./configure \
 			  CFLAGS="-fPIC" \
-			  CPPFLAGS="-I$(SQLITEBUILD) -I$(BZIP2BUILD) -I$(ZLIBBUILD)" \
 			  --without-pymalloc \
 			  --disable-shared \
 			  --disable-ipv6 \
